@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>이병헌 포트폴리오</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      font-family: 'Pretendard', sans-serif;
+    }
+
+    .sidebar a.active {
+  background-color: #444;
+  font-weight: bold;
+}
+
+    .sidebar {
+      width: 200px;
+      background-color: #111;
+      color: white;
+      height: 100vh;
+      padding-top: 20px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar a:hover {
+      background-color: #333;
+    }
+
+    .main-content {
+      margin-left: 200px;
+      padding: 0;
+      width: calc(100% - 200px);
+      background-color: #fff;
+    }
+
+    .tag-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tag_1 {
+    padding: 6px 14px;
+    font-size: 14px;
+    border-radius: 999px;
+    font-weight: 500;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+   .tag:hover {
+      transform: translateY(-5px); /* 위로 5px 이동 */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 그림자 */
+      cursor: default;
+    }
+
+    /* 색상 클래스 */
+    .blue { background-color: #4a90e2; color: #fff; }
+    .green { background-color: #4caf50; color: #fff; }
+    .yellow { background-color: #f5c518; color: #000; }
+    .pink { background-color: #ff5e99; color: #fff; }
+    .orange { background-color: #f39c12; color: #fff; }
+    .purple { background-color: #9b59b6; color: #fff; }
+    .violet { background-color: #8e44ad; color: #fff; }
+    .teal { background-color: #1abc9c; color: #fff; }
+
+    h2, h3 {
+      margin: 0;
+    }
+
+
+  /* 프로젝트 css */
+
+
+    .tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 5px 12px;
+  margin: 2px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.mini.solid {
+  background-color: #111;
+  color: #fff;
+}
+
+.btn.mini.ghost {
+  background-color: #fff;
+  color: #111;
+  border: 1px solid #111;
+}
+
+.btn.mini:hover {
+  opacity: 0.9;
+}
+
+/* Modal 스타일 개선 */
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-modal.open {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: 36px 48px;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.modal-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.modal-content h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.modal-content ul {
+  padding-left: 20px;
+  margin: 0 0 16px 0;
+}
+
+.modal-content li {
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  margin: 4px 0 16px;
+}
+
+.modal-content a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+}
+
+.gallery-modal {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.8);
+z-index: 9999;
+justify-content: center;
+align-items: center;
+}
+.gallery-modal.open {
+display: flex;
+}
+.gallery-content {
+position: relative;
+background: #fff;
+padding: 24px;
+border-radius: 12px;
+text-align: center;
+max-width: 90vw;
+max-height: 90vh;
+}
+.gallery-title {
+font-size: 22px;
+font-weight: bold;
+margin-bottom: 16px;
+}
+.gallery-close {
+position: absolute;
+top: 12px;
+right: 16px;
+background: none;
+border: none;
+font-size: 28px;
+color: #333;
+cursor: pointer;
+}
+.gallery-frame {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 24px;
+}
+.gallery-img {
+max-width: 72vw;
+max-height: 70vh;
+border-radius: 8px;
+}
+.gallery-nav {
+background: #fff;
+border: 1px solid #ccc;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+font-size: 24px;
+cursor: pointer;
+}
+.gallery-indicator {
+margin-top: 12px;
+font-weight: 600;
+}
+
+.project-card {
+  flex: 1 1 45%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 30px 24px;
+  transition: transform 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 16px 0 24px;
+}
+
+.project-card ul {
+  padding-left: 20px;
+  margin-bottom: 24px;
+  line-height: 2.0;
+  font-size: 17px;
+}
+
+.project-card .tag {
+  background: #eee;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 13px;
+  margin: 4px 6px 0 0;
+  display: inline-block;
+  font-weight: 500;
+  color: #333;
+}
+
+
+  </style>
+</head>
+
+
+
+<body>
+  <nav class="sidebar">
+    <a href="#about"><i class="far fa-smile"></i> About Me</a>
+    <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+    <a href="#education"><i class="fas fa-school"></i> Education</a>
+    <a href="#military-service"><i class="fas fa-shield-alt"></i> Military Service</a>
+    <a href="#projects"><i class="fas fa-briefcase"></i> Projects</a>
+    <a href="#career"><i class="fas fa-desktop"></i> Career</a>
+  </nav>
+  
+  <main class="main-content">
+    <section id="about" style="padding: 60px 40px;">
+      <div style="display: flex; align-items: center; gap: 80px;">
+        <!-- 프로필 사진 -->
+        <img src="ebh.jpg" alt="Profile Photo"
+             style="width: 220px; height: 290px; border-radius: 50%; object-fit: cover; margin-top: 30px;" />
+
+        <!-- 자기소개 및 연락처 -->
+        <div>
+          <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 40px;">About Me</h2>
+
+          <div style="font-size: 18px; line-height: 1.8;">
+            <p style="margin-bottom: 20px;">
+              안녕하세요. 변화를 두려워하지 않는 백엔드 개발자 이병헌입니다.
+            </p>
+            <p style="margin-bottom: 20px;">
+              오로지 웹서핑의 수단이었던 노트북을 생산의 수단으로 활용하는 재미에 빠진 지 어느덧 1년이 지났습니다.
+            </p>
+            <p style="margin-bottom: 0;">
+              아직 배울 것이 많지만, 그만큼 더 성장할 수 있음에 감사합니다.
+            </p>
+
+            <!-- 연락처와 이메일 -->
+            <div style="background-color: #f7f8f9; border-radius: 12px; padding: 20px; margin-top: 25px;">
+              <div style="display: flex; justify-content: center; align-items: center; gap: 60px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <i class="fas fa-phone-alt"></i>
+                  <span>010-8826-0998</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <i class="fas fa-envelope"></i>
+                  <span>bh990907@naver.com</span>
+                </div>
+              </div>
+
+              <!-- 소셜 아이콘 -->
+              <div style="display: flex; justify-content: center; gap: 30px; font-size: 28px;">
+                <a href="https://github.com/ebh99" target="_blank" style="color: #000;">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.notion.so/1b99353b2e948012b38cf4d03c8aefec" target="_blank" style="color: #000;">
+                  <i class="fas fa-blog"></i>
+                </a>
+                <a href="https://www.instagram.com/b__honey99/" target="_blank" style="color: #000;">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-------------------------------------------------------------------------------------------------->
+
+      <!-- 경계선 -->
+     <hr style="margin-top: 40px; border: none;">
+
+    <!-------------------------------------------------------------------------------------------------->
+
+      <!-- 스킬 -->
+    <section id="skills" style="padding: 50px 60px; border-top: 2px solid #ccc;">
+    <div>
+    <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 40px;">SKILLS</h2>
+
+    <!-- Language/Framework/Library -->
+    <div>
+      <h3 style="font-size: 26px; font-weight: bold;">Language / Framework / Library</h3>
+
+      <div style="margin-top: 30px; font-size: 20px; font-weight: 600;">편해요</div>
+      <div class="tag-wrapper">
+        <span class="tag_1 blue">Java</span>
+        <span class="tag_1 green">Spring</span>
+        <span class="tag_1 green">Spring Boot</span>
+        <span class="tag_1 green">Spring Legacy</span>
+      </div>
+
+      <div style="margin-top: 30px; font-size: 20px; font-weight: 600;">어느정도 사용할 수 있어요</div>
+      <div class="tag-wrapper">
+        <span class="tag_1 purple">MyBatis</span>
+        <span class="tag_1 orange">Oracle</span>
+        <span class="tag_1 yellow">JavaScript</span>
+        <span class="tag_1 pink">HTML5</span>
+        <span class="tag_1 violet">CSS</span>
+        <span class="tag_1 blue">JSP</span>
+      </div>
+
+      <div style="margin-top: 30px; font-size: 20px; font-weight: 600;">사용해봤어요</div>
+      <div class="tag-wrapper">
+        <span class="tag_1 teal">React.js</span>
+      </div>
+    </div>
+
+    <!-- Tools/Analytics -->
+    <div style="margin-top: 60px;">
+      <h3 style="font-size: 26px; font-weight: bold;">Tools / Analytics</h3>
+
+      <div style="margin-top: 30px; font-size: 20px; font-weight: 600;">편해요</div>
+      <div class="tag-wrapper">
+        <span class="tag_1 yellow">Notion</span>
+        <span class="tag_1 green">Figma</span>
+        <span class="tag_1 blue">Slack</span>
+        <span class="tag_1 purple">Eclipse</span>
+        <span class="tag_1 purple">VSCode</span>
+      </div>
+
+      <div style="margin-top: 30px; font-size: 20px; font-weight: 600;">어느정도 사용할 수 있어요</div>
+      <div class="tag-wrapper">
+        <span class="tag_1 orange">GitHub Actions</span>
+        <span class="tag_1 blue">Git</span>
+        <span class="tag_1 blue">GitHub</span>
+      </div>
+
+      <div style="margin-top: 30px; font-size: 20px; font-weight: 600;">사용해봤어요</div>
+      <div class="tag-wrapper">
+        <span class="tag_1 yellow">AWS-RDS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-------------------------------------------------------------------------------------------------->
+
+<section id="education" style="padding: 50px 60px; border-top: 2px solid #ccc;">
+  <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 40px;">EDUCATION</h2>
+
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    
+    <!-- 1. 에이콘아카데미 / 홍대 -->
+    <li style="display: flex; justify-content: space-between; align-items: flex-start; 
+               margin-bottom: 35px; gap: 40px; max-width: 900px;">
+      <div style="flex: 1;">
+        <h3 style="font-size: 25px; font-weight: 700; margin-bottom: 6px;">⦁ 에이콘아카데미 / 홍대</h3>
+        <p style="font-size: 18px; color: #555; margin: 0;">
+          자바&파이썬 빅데이터 플랫폼 웹서비스 개발자 (5회차)
+        </p>
+      </div>
+      <div style="white-space: nowrap; color: #f47c1e; font-size: 18px; padding-top: 4px;">
+        2025.03 ~ 2025.09
+      </div>
+    </li>
+
+    <!-- 2. 청운대학교 -->
+    <li style="display: flex; justify-content: space-between; align-items: flex-start; 
+               margin-bottom: 35px; gap: 40px; max-width: 900px;">
+      <div style="flex: 1;">
+        <h3 style="font-size: 25px; font-weight: 700; margin-bottom: 6px;">⦁ 청운대학교</h3>
+        <p style="font-size: 18px; color: #555; margin: 0;">컴퓨터공학과</p>
+      </div>
+      <div style="white-space: nowrap; color: #f47c1e; font-size: 18px; padding-top: 4px;">
+        2018.03 - 2024.03
+      </div>
+    </li>
+
+    <!-- 3. 연수고등학교 -->
+    <li style="display: flex; justify-content: space-between; align-items: flex-start; 
+               margin-bottom: 10px; gap: 40px; max-width: 900px;">
+      <div style="flex: 1;">
+        <h3 style="font-size: 25px; font-weight: 700; margin-bottom: 6px;">⦁ 연수고등학교</h3>
+      </div>
+      <div style="white-space: nowrap; color: #f47c1e; font-size: 18px;">
+        2015.03 - 2018.02
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-------------------------------------------------------------------------------------------------->
+
+<section id="military-service" style="padding: 50px 60px; border-top: 2px solid #ccc;">
+  <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 30px;">MILITARY SERVICE</h2>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; max-width: 800px;">
+    <div style="font-size: 20px;">
+      ⦁ <strong>병역사항</strong> ▶ [군필] 해병 병장 만기 전역
+    </div>
+    <div style="color: #f41e1e; font-size: 18px; white-space: nowrap;">
+      2019.05 ~ 2020.12
+    </div>
+  </div>
+</section>
+<!-------------------------------------------------------------------------------------------------->
+
+<!-- Projects Section -->
+<section id="projects" style="padding: 50px 60px; border-top: 2px solid #ccc;">
+  <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 40px;">PROJECTS</h2>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+
+    <!-- 🔥 HotIssue Project Card -->
+    <div style="flex: 1 1 45%; background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); padding: 24px;">
+      <div style="font-size: 14px; color: gray; margin-bottom: 10px;">2025.07.15 - 2025.09.05 (6人 팀 프로젝트)</div>
+      <h3 style="font-size: 20px; font-weight: bold; margin-bottom: 30px;">HotIssue — 맞춤형 뉴스 추천 플랫폼</h3>
+      <ul style="padding-left: 20px; margin-bottom: 30px;">
+        <li>뉴스 요약, 북마크, 카테고리 추천 기능 구현</li>
+        <li>클릭 로그 기반 개인화 추천 파이프라인 설계</li>
+        <li>Oracle, MyBatis, LLM 기반 LangChain API 활용</li>
+        <li>WebSocket을 이용한 실시간 채팅 구현</li>
+        <li>User / Admin 권한에 따른 채팅대기방/채팅방 활성화</li>
+      </ul>
+      <div style="margin-bottom: 16px;">
+        <span class="tag">Java</span>
+        <span class="tag">Spring MVC</span>
+        <span class="tag">Oracle</span>
+        <span class="tag">MyBatis</span>
+        <span class="tag">Python</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">LLM</span>
+      </div>
+      <div>
+    <button class="btn mini solid" onclick="openModal('hotissue')">
+      <i class="fas fa-file-alt"></i> README
+    </button>
+    <button class="btn mini ghost" onclick="openGallery('hotissue')">
+      <i class="fas fa-image"></i> IMAG
+
+      </div>
+    </div>
+
+    <!-- 🧭 Hellmate Project Card -->
+<div style="flex: 1 1 45%; background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); padding: 24px;">
+<div style="font-size: 14px; color: gray; margin-bottom: 10px;">2025.05.19 - 2025.07.04 (4人 팀 프로젝트)</div>
+<h3 style="font-size: 20px; font-weight: bold; margin-bottom: 30px;">Hellmate — 운동/식당 기록 웹 플랫폼</h3>
+<ul style="padding-left: 20px; margin-bottom: 30px;">
+<li>팀장으로 활동</li>
+<li>게시물, 댓글 CRUD 구현</li>
+<li>식당/운동 기록 및 주간 요약 기능 구현</li>
+<li>트레이너/러닝크루의 피드백 기능 포함</li>
+<li>Chart.js를 통한 시각화 데이터 처리</li>
+</ul>
+<div style="margin-bottom: 16px;">
+<span class="tag">Java</span>
+<span class="tag">Spring MVC</span>
+<span class="tag">Oracle</span>
+<span class="tag">MyBatis</span>
+</div>
+<div>
+
+    <button class="btn mini solid" onclick="openModal('hellmate')">
+      <i class="fas fa-file-alt"></i> README
+    </button>
+    <button class="btn mini ghost" onclick="openGallery('hellmate')">
+      <i class="fas fa-image"></i> IMAG
+
+</div>
+</div>
+  </div>
+</section>
+<!-------------------------------------------------------------------------------------------------->
+<hr style="margin-top: 60px; border: none; border-top: 2px solid #ccc;">
+
+<!-- CAREER Section -->
+<section id="career" style="padding: 60px;">
+  <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 50px;">CAREER</h2>
+
+  <div style="position: relative; padding-left: 30px;">
+    <!-- 세로선 -->
+    <div style="position: absolute; left: 6px; top: 5px; bottom: 0; width: 3px; background: #ccc;"></div>
+
+    <!-- 경력 블록 -->
+    <div style="position: relative; background: #fff; padding: 30px 40px; margin-bottom: 30px;
+                border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 1000px;">
+      <!-- 동그라미 표시 -->
+      <div style="position: absolute; left: -18px; top: 30px; width: 16px; height: 16px;
+                  background: white; border: 4px solid #1e3a8a; border-radius: 50%;"></div>
+
+      <!-- 내용 -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <!-- 왼쪽 텍스트 -->
+        <div>
+          <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">청운대학교</h3>
+          <p style="font-size: 18px; color: #333; margin-bottom: 14px;">컴퓨터공학과 행정조교</p>
+
+          <strong style="font-size: 18px;">주요 업무</strong>
+          <ul style="font-size: 16px; line-height: 1.8; color: #444; margin-top: 10px; padding-left: 20px;">
+            <li>학과 행정 업무</li>
+            <li> 실습실 3개실 관리(Pc,서버,네트워크 상대 점검 및 유지보수)</li>
+            <li> 실습환경 구축 및 간단한 코드 디버깅 보조</li>
+            <li>익년도(2024) 사업계획서 작성 - 학과 예산 전년(2023)대비 100% 이상 인상 확정</li>
+          </ul>
+        </div>
+
+        <!-- 오른쪽 날짜 -->
+        <div style="white-space: nowrap; color: #777; font-size: 16px; margin-left: 40px;">
+          2024.03 - 2025.02
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- 🔍 README Modal -->
+<div id="modal-hotissue" class="custom-modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('hotissue')">✕</button>
+    <h2>README.md</h2>
+    <hr>
+    <h3>📎 Deployment URL</h3>
+    <p><strong>GitHub:</strong> <a href="#">https://github.com/hykim-king/awesome</a></p>
+    <hr>
+    <h3>서비스 요약</h3>
+    <ul>
+      <li>과잉 정보 속에서 최근 7일 클릭 로그 기반으로 나의 관심 카테고리를 자동 추정하고, 요약·북마크·추천을 한 화면 흐름으로 제공하는 대시보드형 뉴스 플랫폼입니다. 카테고리 채팅/챗봇으로 탐색 비용을 낮춥니다.</li>
+    </ul>
+    <hr>
+    <h3>개발 배경 및 고객 페르소나</h3>
+    <ul>
+      <li>“내 관심사만 빠르게” 소비하려는 사용자에게 클릭 로그만으로 개인화 추천을 제공하기 위해 설계했습니다.</li>
+      <li>대학생/취준생: 면접·시사 대비, 북마크 관리(짧은 요약, 카테고리 집중)</li>
+      <li>직장인(시간 민감): 출퇴근 10분 큐레이션(최근 7일 관심 기반 Top N)</li>
+    </ul>
+    <hr>
+    <h3>의미</h3>
+    <ul>
+      <li>로그 기반 개인화 실전 — 클릭 로그→주 관심 카테고리→동적 추천 파이프라인 구현</li>
+      <li>시각화의 효용 체감 — Google Charts·워드클라우드로 사용자에게 보이는 가치 설계</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 🔍 README Modal -->
+<div id="modal-hellmate" class="custom-modal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeModal('hellmate')">✕</button>
+<h2>README.md</h2>
+<hr>
+<h3>📎 Deployment URL</h3>
+<p><strong>GitHub:</strong> <a href="#">https://github.com/hykim-king/hellmate</a></p>
+<hr>
+<h3>서비스 요약</h3>
+<ul>
+<li>식당/운동 기록을 공유하고 피드백을 받을 수 있는 어느 정상의 게시판 플랫폼</li>
+</ul>
+<hr>
+<h3>개발 배경 및 고객 페르소나</h3>
+<ul>
+<li>운동/식당 관리가 필요한 시설 이용자</li>
+<li>회원가 된 팀원 사이에서 저장한 데이터를 공유하고 피드백 받는 포맷 테이블</li>
+</ul>
+<hr>
+<h3>의미</h3>
+<ul>
+<li>회원사이 공유하는 키를 통해 진실된 구조 생성</li>
+<li>식당/운동 기록 요약 등을 통한 장기 내 관리 사이트 구현</li>
+</ul>
+</div>
+</div>
+
+<!-- 🖼️ IMAGE Gallery Modal -->
+<div id="gallery-hotissue" class="gallery-modal" aria-hidden="true">
+  <div class="gallery-content">
+    <h3 class="gallery-title">Project Images</h3>
+    <button class="gallery-close" onclick="closeGallery('hotissue')">&times;</button>
+
+    <div class="gallery-frame">
+      <button class="gallery-nav left" onclick="changeImage('hotissue', -1)">‹</button>
+      <img id="gallery-img-hotissue" src="assets/images/hotissue_wbs1.png" alt="hotissue image" class="gallery-img">
+      <button class="gallery-nav right" onclick="changeImage('hotissue', 1)">›</button>
+    </div>
+
+    <div class="gallery-indicator">
+      <span id="gallery-index-hotissue">1</span> / <span id="gallery-total-hotissue">4</span>
+    </div>
+  </div>
+</div>
+
+<!-- 🔼️ IMAGE Gallery Modal -->
+<div id="gallery-hellmate" class="gallery-modal" aria-hidden="true">
+<div class="gallery-content">
+<h3 class="gallery-title">Project Images</h3>
+<button class="gallery-close" onclick="closeGallery('hellmate')">×</button>
+
+
+<div class="gallery-frame">
+<button class="gallery-nav left" onclick="changeImage('hellmate', -1')">‹</button>
+<img id="gallery-img-hellmate" src="assets/images/hellmate_main.png" alt="hellmate image" class="gallery-img">
+<button class="gallery-nav right" onclick="changeImage('hellmate', 1)">›</button>
+</div>
+
+
+<div class="gallery-indicator">
+<span id="gallery-index-hellmate">1</span> / <span id="gallery-total-hellmate">3</span>
+</div>
+</div>
+</div>
+
+
+
+<script>
+/*hotIssue*/
+
+  function openModal(projectId) {
+    document.getElementById(`modal-${projectId}`).classList.add('open');
+  }
+  function closeModal(projectId) {
+    document.getElementById(`modal-${projectId}`).classList.remove('open');
+  }
+
+  const galleryImagesHotissue = [
+    "assets/images/hotissue_erd.png",
+    "assets/images/hotissue_wbs1.png",
+    "assets/images/hotissue_wbs2.png",
+    "assets/images/hotissue_wbs3.png",
+    "assets/images/hotissue_wbs4.png",
+    "assets/images/hotissue_prd1.png",
+    "assets/images/hotissue_prd2.png",
+    "assets/images/hotIssue_main.png",
+    "assets/images/hotIssue_mypage.png",
+    "assets/images/hotIssue_chat.png",
+    "assets/images/hotIssue_category.png"
+  ];
+
+  let currentIndexHotissue = 0;
+
+  function openGallery(projectId) {
+    if (projectId === 'hotissue') {
+      document.getElementById(`gallery-${projectId}`).classList.add('open');
+      showImage(projectId, 0);
+    }
+  }
+
+  function closeGallery(projectId) {
+    document.getElementById(`gallery-${projectId}`).classList.remove('open');
+  }
+
+  function changeImage(projectId, delta) {
+    if (projectId === 'hotissue') {
+      currentIndexHotissue = (currentIndexHotissue + delta + galleryImagesHotissue.length) % galleryImagesHotissue.length;
+      showImage(projectId, currentIndexHotissue);
+    }
+  }
+
+  function showImage(projectId, index) {
+    if (projectId === 'hotissue') {
+      const img = document.getElementById(`gallery-img-hotissue`);
+      img.src = galleryImagesHotissue[index];
+      document.getElementById(`gallery-index-hotissue`).textContent = index + 1;
+      document.getElementById(`gallery-total-hotissue`).textContent = galleryImagesHotissue.length;
+    }
+  }
+
+  /*hellmate*/
+const galleryImagesHellmate = [
+"assets/images/hellmate_prd.png",
+"assets/images/hellmate_erd1.png",
+"assets/images/hellmate_erd2.png",
+"assets/images/hellmate_erd3.png",
+"assets/images/hellmate_main.png",
+"assets/images/hellmate_loginhome.png",
+"assets/images/hellmate_join.png",
+"assets/images/hellmate_gym.png",
+"assets/images/hellmate_food.png",
+"assets/images/hellmate_crud.png"
+];
+
+
+let currentIndexHellmate = 0;
+
+
+function openGallery(projectId) {
+if (projectId === 'hellmate') {
+document.getElementById(`gallery-${projectId}`).classList.add('open');
+showImage(projectId, 0);
+}
+}
+
+
+function closeGallery(projectId) {
+document.getElementById(`gallery-${projectId}`).classList.remove('open');
+}
+
+
+function changeImage(projectId, delta) {
+if (projectId === 'hellmate') {
+currentIndexHellmate = (currentIndexHellmate + delta + galleryImagesHellmate.length) % galleryImagesHellmate.length;
+showImage(projectId, currentIndexHellmate);
+}
+}
+
+
+function showImage(projectId, index) {
+if (projectId === 'hellmate') {
+const img = document.getElementById(`gallery-img-hellmate`);
+img.src = galleryImagesHellmate[index];
+document.getElementById(`gallery-index-hellmate`).textContent = index + 1;
+document.getElementById(`gallery-total-hellmate`).textContent = galleryImagesHellmate.length;
+}
+}
+
+
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.sidebar a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+</script>
