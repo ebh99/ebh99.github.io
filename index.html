@@ -535,7 +535,7 @@ font-weight: 600;
       <i class="fas fa-file-alt"></i> README
     </button>
     <button class="btn mini ghost" onclick="openGallery('hotissue')">
-      <i class="fas fa-image"></i> IMAG
+      <i class="fas fa-image"></i> IMAGES
 
       </div>
     </div>
@@ -563,7 +563,7 @@ font-weight: 600;
       <i class="fas fa-file-alt"></i> README
     </button>
     <button class="btn mini ghost" onclick="openGallery('hellmate')">
-      <i class="fas fa-image"></i> IMAG
+      <i class="fas fa-image"></i> IMAGES
 
 </div>
 </div>
@@ -713,107 +713,86 @@ font-weight: 600;
 
 
 <script>
-/*hotIssue*/
-
+  /* 모달 열기 / 닫기 */
   function openModal(projectId) {
     document.getElementById(`modal-${projectId}`).classList.add('open');
   }
+
   function closeModal(projectId) {
     document.getElementById(`modal-${projectId}`).classList.remove('open');
   }
 
-  const galleryImagesHotissue = [
-    "assets/images/hotissue_erd.png",
-    "assets/images/hotissue_wbs1.png",
-    "assets/images/hotissue_wbs2.png",
-    "assets/images/hotissue_wbs3.png",
-    "assets/images/hotissue_wbs4.png",
-    "assets/images/hotissue_prd1.png",
-    "assets/images/hotissue_prd2.png",
-    "assets/images/hotIssue_main.png",
-    "assets/images/hotIssue_mypage.png",
-    "assets/images/hotIssue_chat.png",
-    "assets/images/hotIssue_category.png"
-  ];
+  /* 갤러리 이미지 배열 */
+  const galleryImages = {
+    hotissue: [
+      "assets/images/hotissue_erd.png",
+      "assets/images/hotissue_wbs1.png",
+      "assets/images/hotissue_wbs2.png",
+      "assets/images/hotissue_wbs3.png",
+      "assets/images/hotissue_wbs4.png",
+      "assets/images/hotissue_prd1.png",
+      "assets/images/hotissue_prd2.png",
+      "assets/images/hotissue_main.png",
+      "assets/images/hotissue_mypage.png",
+      "assets/images/hotissue_chat.png",
+      "assets/images/hotissue_category.png"
+    ],
+    hellmate: [
+      "assets/images/hellmate_prd.png",
+      "assets/images/hellmate_erd1.png",
+      "assets/images/hellmate_erd2.png",
+      "assets/images/hellmate_erd3.png",
+      "assets/images/hellmate_main.png",
+      "assets/images/hellmate_loginhome.png",
+      "assets/images/hellmate_join.png",
+      "assets/images/hellmate_gym.png",
+      "assets/images/hellmate_food.png",
+      "assets/images/hellmate_crud.png"
+    ]
+  };
 
-  let currentIndexHotissue = 0;
+  let currentIndex = {
+    hotissue: 0,
+    hellmate: 0
+  };
 
   function openGallery(projectId) {
-    if (projectId === 'hotissue') {
-      document.getElementById(`gallery-${projectId}`).classList.add('open');
+    const gallery = document.getElementById(`gallery-${projectId}`);
+    if (gallery) {
+      gallery.classList.add('open');
       showImage(projectId, 0);
     }
   }
 
   function closeGallery(projectId) {
-    document.getElementById(`gallery-${projectId}`).classList.remove('open');
+    const gallery = document.getElementById(`gallery-${projectId}`);
+    if (gallery) {
+      gallery.classList.remove('open');
+    }
   }
 
   function changeImage(projectId, delta) {
-    if (projectId === 'hotissue') {
-      currentIndexHotissue = (currentIndexHotissue + delta + galleryImagesHotissue.length) % galleryImagesHotissue.length;
-      showImage(projectId, currentIndexHotissue);
-    }
+    const images = galleryImages[projectId];
+    if (!images) return;
+
+    currentIndex[projectId] = (currentIndex[projectId] + delta + images.length) % images.length;
+    showImage(projectId, currentIndex[projectId]);
   }
 
   function showImage(projectId, index) {
-    if (projectId === 'hotissue') {
-      const img = document.getElementById(`gallery-img-hotissue`);
-      img.src = galleryImagesHotissue[index];
-      document.getElementById(`gallery-index-hotissue`).textContent = index + 1;
-      document.getElementById(`gallery-total-hotissue`).textContent = galleryImagesHotissue.length;
-    }
+    const imgElement = document.getElementById(`gallery-img-${projectId}`);
+    const indexElement = document.getElementById(`gallery-index-${projectId}`);
+    const totalElement = document.getElementById(`gallery-total-${projectId}`);
+
+    const images = galleryImages[projectId];
+    if (!imgElement || !images || index < 0 || index >= images.length) return;
+
+    imgElement.src = images[index];
+    indexElement.textContent = index + 1;
+    totalElement.textContent = images.length;
   }
 
-  /*hellmate*/
-const galleryImagesHellmate = [
-"assets/images/hellmate_prd.png",
-"assets/images/hellmate_erd1.png",
-"assets/images/hellmate_erd2.png",
-"assets/images/hellmate_erd3.png",
-"assets/images/hellmate_main.png",
-"assets/images/hellmate_loginhome.png",
-"assets/images/hellmate_join.png",
-"assets/images/hellmate_gym.png",
-"assets/images/hellmate_food.png",
-"assets/images/hellmate_crud.png"
-];
-
-
-let currentIndexHellmate = 0;
-
-
-function openGallery(projectId) {
-if (projectId === 'hellmate') {
-document.getElementById(`gallery-${projectId}`).classList.add('open');
-showImage(projectId, 0);
-}
-}
-
-
-function closeGallery(projectId) {
-document.getElementById(`gallery-${projectId}`).classList.remove('open');
-}
-
-
-function changeImage(projectId, delta) {
-if (projectId === 'hellmate') {
-currentIndexHellmate = (currentIndexHellmate + delta + galleryImagesHellmate.length) % galleryImagesHellmate.length;
-showImage(projectId, currentIndexHellmate);
-}
-}
-
-
-function showImage(projectId, index) {
-if (projectId === 'hellmate') {
-const img = document.getElementById(`gallery-img-hellmate`);
-img.src = galleryImagesHellmate[index];
-document.getElementById(`gallery-index-hellmate`).textContent = index + 1;
-document.getElementById(`gallery-total-hellmate`).textContent = galleryImagesHellmate.length;
-}
-}
-
-
+  /* 섹션 스크롤 시 사이드바 메뉴 활성화 */
   const sections = document.querySelectorAll('section');
   const navLinks = document.querySelectorAll('.sidebar a');
 
@@ -833,5 +812,5 @@ document.getElementById(`gallery-total-hellmate`).textContent = galleryImagesHel
       }
     });
   });
-
 </script>
+
